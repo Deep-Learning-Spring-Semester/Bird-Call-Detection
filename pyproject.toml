@@ -5,6 +5,9 @@ description = "Bird call detection using recordings from the Xeno-Canto API"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "librosa>=0.11.0",
+    "numpy>=2.3.5",
     "python-dotenv>=1.2.1",
     "requests>=2.32.5",
+    "soundfile>=0.13.1",
 ]
