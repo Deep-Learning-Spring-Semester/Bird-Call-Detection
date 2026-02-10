@@ -3,3 +3,9 @@
 data/
 __pycache__/
 *.pyc
+*.lock
+
+# Deepnet outputs
+deepnet/checkpoints/
+deepnet/runs/
+deepnet/results/
