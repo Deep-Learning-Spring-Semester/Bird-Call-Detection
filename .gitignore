@@ -5,7 +5,9 @@ __pycache__/
 *.pyc
 *.lock
 
-# Deepnet outputs
+# Deepnet
+deepnet/DEEPNET_PLAN.md
 deepnet/checkpoints/
 deepnet/runs/
 deepnet/results/
+.DS_Store
