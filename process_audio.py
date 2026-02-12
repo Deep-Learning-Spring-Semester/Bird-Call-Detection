@@ -163,8 +163,12 @@ def generate_spectrogram(y: np.ndarray, sr: int, output_path: Path,
         
         # Save
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        plt.savefig(output_path, dpi=150, bbox_inches='tight')
+        plt.savefig(output_path, dpi=150, bbox_inches='tight', facecolor='white')
         plt.close()
+        from PIL import Image
+
+        img = Image.open(output_path).convert("RGB")
+        img.save(output_path)
         return True
         
     except Exception as e:
