@@ -195,13 +195,13 @@ def build_efficientnet_model(num_classes: int, model_name: str = "B0",
     """
     # Select EfficientNet variant
     if model_name == "B0":
-        base_model = EfficientNetB0(include_top=False, weights=None, 
+        base_model = EfficientNetB0(include_top=False, weights='imagenet', 
                                     input_shape=(224, 224, 3))
     elif model_name == "B1":
-        base_model = EfficientNetB1(include_top=False, weights=None, 
+        base_model = EfficientNetB1(include_top=False, weights='imagenet', 
                                     input_shape=(224, 224, 3))
     elif model_name == "B2":
-        base_model = EfficientNetB2(include_top=False, weights=None, 
+        base_model = EfficientNetB2(include_top=False, weights='imagenet', 
                                     input_shape=(224, 224, 3))
     else:
         raise ValueError(f"Unknown model: {model_name}")
