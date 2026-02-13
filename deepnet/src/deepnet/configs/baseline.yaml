@@ -1,0 +1,54 @@
+# DEEPNET Baseline Configuration
+# Week 1 experiment - no spectrogram augmentation, label smoothing CE loss
+
+experiment_name: "baseline_v1"
+
+# Data
+data:
+  batch_size: 32
+  num_workers: 4
+  pin_memory: true  # Set to false for MPS backend
+  use_augmented: false  # Don't use audio-augmented files yet (Week 2)
+  weighted_sampling: true  # Use weighted sampler for class imbalance
+
+# Model
+model:
+  num_classes: 18
+  dropout: 0.5
+
+# Loss
+loss:
+  type: "label_smoothing"  # Options: label_smoothing, focal, weighted_ce
+  smoothing: 0.1  # For label smoothing
+  gamma: 2.0  # For focal loss
+  class_weights_method: "inverse_sqrt"  # For weighted CE: inverse, inverse_sqrt, effective_samples
+
+# Optimizer
+optimizer:
+  lr: 0.001
+  weight_decay: 0.01
+  min_lr: 1.0e-6  # For cosine annealing scheduler
+
+# Training
+training:
+  num_epochs: 50
+  patience: 10  # Early stopping patience
+  seed: 42
+
+# Augmentation (disabled for baseline)
+augmentation:
+  spec_augment: false
+  freq_mask_param: 15
+  time_mask_param: 25
+  num_masks: 2
+  mixup: false
+  mixup_alpha: 0.3
+  cutmix: false
+  cutmix_alpha: 1.0
+
+# Paths (relative to project root)
+paths:
+  data_root: "../data"  # Relative to deepnet/
+  mel_tensors: "processed/mel_tensors"
+  checkpoints: "checkpoints"
+  logs: "runs"
