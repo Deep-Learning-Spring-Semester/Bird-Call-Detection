@@ -6,15 +6,22 @@ Includes:
 - Random seed setting for reproducibility
 - Checkpoint I/O helpers
 - Configuration loading
+- Path constants
 """
 
-import os
+import logging
 import random
 from pathlib import Path
 
 import numpy as np
 import torch
 import yaml
+
+
+# Project paths (relative to deepnet/)
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+DATA_ROOT = PROJECT_ROOT.parent / "data"
+CONFIGS_DIR = PROJECT_ROOT / "src" / "deepnet" / "configs"
 
 
 def get_device(prefer_mps=True):
@@ -216,6 +223,29 @@ def format_time(seconds):
         return f"{minutes}m {secs}s"
     else:
         return f"{secs}s"
+
+
+def setup_logging(name):
+    """
+    Set up logger for a module.
+
+    Args:
+        name: Logger name (typically module name)
+
+    Returns:
+        logger: Configured logger instance
+    """
+    logger = logging.getLogger(name)
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S'
+        )
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.setLevel(logging.INFO)
+    return logger
 
 
 if __name__ == "__main__":
