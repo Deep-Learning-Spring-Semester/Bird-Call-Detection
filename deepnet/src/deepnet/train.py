@@ -107,12 +107,23 @@ def main():
 
     # Build dataloaders
     print("\nBuilding dataloaders...")
-    train_loader, val_loader, test_loader = build_dataloaders(config)
+
+    # Flatten config for build_dataloaders
+    data_config = {
+        'batch_size': config['data']['batch_size'],
+        'num_workers': config['data']['num_workers'],
+        'use_augmented': config['data'].get('use_augmented', False),
+        'use_weighted_sampler': config['data'].get('weighted_sampling', True),
+        'seed': config['training'].get('seed', 42)
+    }
+
+    train_loader, val_loader, test_loader, label_map, class_weights = build_dataloaders(data_config)
 
     print(f"Training samples: {len(train_loader.dataset)}")
     print(f"Validation samples: {len(val_loader.dataset)}")
     print(f"Test samples: {len(test_loader.dataset)}")
     print(f"Batch size: {config['data']['batch_size']}")
+    print(f"Number of classes: {len(label_map)}")
 
     # Create model
     print("\nCreating model...")
