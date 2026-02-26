@@ -72,7 +72,7 @@ STAGES = {
         'format': '{:.1f}',
     },
     'batch_size': {
-        'values': [16, 32, 64],
+        'values': [16, 32],
         'config_path': ['data', 'batch_size'],
         'description': 'Batch size',
         'format': '{}',

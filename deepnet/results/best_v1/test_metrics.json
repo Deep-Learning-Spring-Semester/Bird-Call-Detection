@@ -1,0 +1,217 @@
+{
+  "experiment": "best_v1",
+  "top1_accuracy": 73.2824427480916,
+  "top3_accuracy": 91.6030534351145,
+  "top5_accuracy": 93.12977099236642,
+  "macro_f1": 0.7278547281815255,
+  "weighted_f1": 0.7279724283765595,
+  "num_samples": 131,
+  "per_class": [
+    {
+      "class_name": "Anhinga",
+      "class_id": 0,
+      "precision": 0.6,
+      "recall": 0.6,
+      "f1": 0.6,
+      "support": 5
+    },
+    {
+      "class_name": "Bachman's_Sparrow",
+      "class_id": 1,
+      "precision": 0.8888888888888888,
+      "recall": 0.8888888888888888,
+      "f1": 0.8888888888888888,
+      "support": 9
+    },
+    {
+      "class_name": "Blue_Jay",
+      "class_id": 2,
+      "precision": 0.3333333333333333,
+      "recall": 0.3333333333333333,
+      "f1": 0.3333333333333333,
+      "support": 6
+    },
+    {
+      "class_name": "Boat-tailed_Grackle",
+      "class_id": 3,
+      "precision": 0.7857142857142857,
+      "recall": 0.8461538461538461,
+      "f1": 0.8148148148148148,
+      "support": 13
+    },
+    {
+      "class_name": "Carolina_Wren",
+      "class_id": 4,
+      "precision": 0.42857142857142855,
+      "recall": 0.375,
+      "f1": 0.4,
+      "support": 8
+    },
+    {
+      "class_name": "Common_Gallinule",
+      "class_id": 5,
+      "precision": 0.6666666666666666,
+      "recall": 0.5714285714285714,
+      "f1": 0.6153846153846154,
+      "support": 7
+    },
+    {
+      "class_name": "Common_Grackle",
+      "class_id": 6,
+      "precision": 0.8,
+      "recall": 0.6666666666666666,
+      "f1": 0.7272727272727273,
+      "support": 6
+    },
+    {
+      "class_name": "Eastern_Meadowlark",
+      "class_id": 7,
+      "precision": 0.8333333333333334,
+      "recall": 0.8333333333333334,
+      "f1": 0.8333333333333334,
+      "support": 6
+    },
+    {
+      "class_name": "Fish_Crow",
+      "class_id": 8,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 6
+    },
+    {
+      "class_name": "Great_Crested_Flycatcher",
+      "class_id": 9,
+      "precision": 1.0,
+      "recall": 0.8571428571428571,
+      "f1": 0.9230769230769231,
+      "support": 7
+    },
+    {
+      "class_name": "Lesser_Yellowlegs",
+      "class_id": 10,
+      "precision": 0.8571428571428571,
+      "recall": 1.0,
+      "f1": 0.9230769230769231,
+      "support": 6
+    },
+    {
+      "class_name": "Limpkin",
+      "class_id": 11,
+      "precision": 0.6363636363636364,
+      "recall": 1.0,
+      "f1": 0.7777777777777778,
+      "support": 7
+    },
+    {
+      "class_name": "Northern_Cardinal",
+      "class_id": 12,
+      "precision": 0.625,
+      "recall": 0.5555555555555556,
+      "f1": 0.5882352941176471,
+      "support": 9
+    },
+    {
+      "class_name": "Northern_Parula",
+      "class_id": 13,
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571428571428571,
+      "support": 6
+    },
+    {
+      "class_name": "Red-bellied_Woodpecker",
+      "class_id": 14,
+      "precision": 0.6666666666666666,
+      "recall": 0.5,
+      "f1": 0.5714285714285714,
+      "support": 8
+    },
+    {
+      "class_name": "Red-winged_Blackbird",
+      "class_id": 15,
+      "precision": 0.8333333333333334,
+      "recall": 0.625,
+      "f1": 0.7142857142857143,
+      "support": 8
+    },
+    {
+      "class_name": "Roseate_Tern",
+      "class_id": 16,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 7
+    },
+    {
+      "class_name": "White-eyed_Vireo",
+      "class_id": 17,
+      "precision": 0.5,
+      "recall": 0.5714285714285714,
+      "f1": 0.5333333333333333,
+      "support": 7
+    }
+  ],
+  "confused_pairs": [
+    {
+      "true_class": "Boat-tailed_Grackle",
+      "predicted_class": "Limpkin",
+      "count": 2,
+      "percentage": 15.384615384615385
+    },
+    {
+      "true_class": "Carolina_Wren",
+      "predicted_class": "Blue_Jay",
+      "count": 2,
+      "percentage": 25.0
+    },
+    {
+      "true_class": "Carolina_Wren",
+      "predicted_class": "Northern_Cardinal",
+      "count": 2,
+      "percentage": 25.0
+    },
+    {
+      "true_class": "Northern_Cardinal",
+      "predicted_class": "Carolina_Wren",
+      "count": 2,
+      "percentage": 22.22222222222222
+    },
+    {
+      "true_class": "Anhinga",
+      "predicted_class": "Common_Gallinule",
+      "count": 1,
+      "percentage": 20.0
+    },
+    {
+      "true_class": "Anhinga",
+      "predicted_class": "Red-bellied_Woodpecker",
+      "count": 1,
+      "percentage": 20.0
+    },
+    {
+      "true_class": "Bachman's_Sparrow",
+      "predicted_class": "White-eyed_Vireo",
+      "count": 1,
+      "percentage": 11.11111111111111
+    },
+    {
+      "true_class": "Blue_Jay",
+      "predicted_class": "Carolina_Wren",
+      "count": 1,
+      "percentage": 16.666666666666668
+    },
+    {
+      "true_class": "Blue_Jay",
+      "predicted_class": "Common_Gallinule",
+      "count": 1,
+      "percentage": 16.666666666666668
+    },
+    {
+      "true_class": "Blue_Jay",
+      "predicted_class": "Limpkin",
+      "count": 1,
+      "percentage": 16.666666666666668
+    }
+  ]
+}

@@ -9,5 +9,10 @@ __pycache__/
 deepnet/DEEPNET_PLAN.md
 deepnet/checkpoints/
 deepnet/runs/
-deepnet/results/
+
+# Track results plots/metrics; ignore any large binary artifacts inside results
+deepnet/results/**/*.pt
+deepnet/results/**/*.pkl
+deepnet/results/**/*.npy
+deepnet/results/**/*.npz
 .DS_Store
