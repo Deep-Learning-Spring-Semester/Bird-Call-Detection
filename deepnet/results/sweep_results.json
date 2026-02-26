@@ -1,0 +1,26 @@
+[
+  {
+    "experiment_name": "sweep_scheduler_cosine",
+    "val_acc": 64.12213740458016,
+    "val_loss": 1.782382951842414,
+    "epochs_run": 20,
+    "value": "cosine",
+    "stage": "scheduler"
+  },
+  {
+    "experiment_name": "sweep_scheduler_onecycle",
+    "val_acc": 66.41221374045801,
+    "val_loss": 1.7681070698632135,
+    "epochs_run": 20,
+    "value": "onecycle",
+    "stage": "scheduler"
+  },
+  {
+    "experiment_name": "sweep_scheduler_plateau",
+    "val_acc": 61.83206106870229,
+    "val_loss": 1.851503160264757,
+    "epochs_run": 20,
+    "value": "plateau",
+    "stage": "scheduler"
+  }
+]

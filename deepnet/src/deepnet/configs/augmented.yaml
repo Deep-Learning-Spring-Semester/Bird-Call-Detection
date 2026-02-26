@@ -1,0 +1,56 @@
+# DEEPNET SpecAugment Configuration
+# Day 8 experiment: SpecAugment only, no audio-augmented files
+# Baseline + frequency/time masking to improve generalisation
+
+experiment_name: "augmented_v1"
+
+# Data
+data:
+  batch_size: 32
+  num_workers: 4
+  use_augmented: false  # Audio augmented files added in Day 9 (audio_augmented.yaml)
+  weighted_sampling: true
+
+# Model
+model:
+  num_classes: 18
+  dropout: 0.5
+
+# Loss
+loss:
+  type: "label_smoothing"
+  smoothing: 0.1
+  gamma: 2.0
+  class_weights_method: "inverse_sqrt"
+
+# Optimizer
+optimizer:
+  lr: 0.001
+  weight_decay: 0.01
+  min_lr: 1.0e-6
+
+# Training
+training:
+  num_epochs: 50
+  patience: 10
+  seed: 42
+
+# Augmentation — SpecAugment enabled
+augmentation:
+  spec_augment: true
+  freq_mask_param: 15   # Max frequency bands to mask
+  time_mask_param: 25   # Max time frames to mask
+  num_masks: 2          # Number of masks of each type
+  time_shift: false
+  gaussian_noise: false
+  mixup: false
+  mixup_alpha: 0.3
+  cutmix: false
+  cutmix_alpha: 1.0
+
+# Paths (relative to project root)
+paths:
+  data_root: "../data"
+  mel_tensors: "processed/mel_tensors"
+  checkpoints: "checkpoints"
+  logs: "runs"

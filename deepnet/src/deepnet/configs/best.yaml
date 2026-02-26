@@ -1,0 +1,40 @@
+experiment_name: best_v1
+data:
+  batch_size: 16
+  num_workers: 4
+  use_augmented: true
+  weighted_sampling: true
+model:
+  num_classes: 18
+  dropout: 0.3
+loss:
+  type: label_smoothing
+  smoothing: 0.1
+  gamma: 2.0
+  class_weights_method: inverse_sqrt
+optimizer:
+  lr: 0.005
+  weight_decay: 0.01
+  min_lr: 1.0e-06
+  scheduler: onecycle
+training:
+  num_epochs: 50
+  patience: 15
+  seed: 42
+augmentation:
+  spec_augment: true
+  freq_mask_param: 15
+  time_mask_param: 25
+  num_masks: 2
+  time_shift: false
+  gaussian_noise: false
+  mixup: false
+  mixup_alpha: 0.3
+  cutmix: false
+  cutmix_alpha: 1.0
+paths:
+  data_root: ../data
+  mel_tensors: processed/mel_tensors
+  checkpoints: checkpoints
+  logs: runs
+  results: results
