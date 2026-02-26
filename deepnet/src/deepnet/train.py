@@ -18,6 +18,7 @@ from deepnet.dataset import build_dataloaders
 from deepnet.losses import FocalLoss, LabelSmoothingCE, WeightedCE, compute_class_weights
 from deepnet.model import DeepNet
 from deepnet.trainer import Trainer
+from deepnet.transforms import build_spec_augment
 from deepnet.utils import get_device, load_config, set_seed
 
 
@@ -117,7 +118,19 @@ def main():
         'seed': config['training'].get('seed', 42)
     }
 
-    train_loader, val_loader, test_loader, label_map, class_weights = build_dataloaders(data_config)
+    # Build spectrogram transform for training (val/test are never augmented)
+    aug_config = config.get('augmentation', {})
+    train_transform = build_spec_augment(aug_config)
+    if train_transform is not None:
+        print(f"SpecAugment enabled: freq_mask={aug_config.get('freq_mask_param', 15)}, "
+              f"time_mask={aug_config.get('time_mask_param', 25)}, "
+              f"num_masks={aug_config.get('num_masks', 2)}")
+    else:
+        print("No spectrogram augmentation")
+
+    train_loader, val_loader, test_loader, label_map, class_weights = build_dataloaders(
+        data_config, train_transform=train_transform
+    )
 
     print(f"Training samples: {len(train_loader.dataset)}")
     print(f"Validation samples: {len(val_loader.dataset)}")
@@ -143,8 +156,12 @@ def main():
         'weight_decay': config['optimizer']['weight_decay'],
         'min_lr': config['optimizer'].get('min_lr', 1e-6),
         'num_epochs': config['training']['num_epochs'],
-        'patience': config['training']['patience']
+        'patience': config['training']['patience'],
+        'scheduler': config['optimizer'].get('scheduler', 'cosine'),
     }
+
+    # Class names sorted by label index (for test evaluation report)
+    class_names = sorted(label_map.keys(), key=lambda k: label_map[k])
 
     # Create trainer
     print("\nInitializing trainer...")
@@ -156,7 +173,10 @@ def main():
         config=trainer_config,
         device=device,
         checkpoint_dir=config['paths'].get('checkpoints', 'checkpoints'),
-        log_dir=config['paths'].get('logs', 'runs')
+        log_dir=config['paths'].get('logs', 'runs'),
+        results_dir=config['paths'].get('results', 'results'),
+        test_loader=test_loader,
+        class_names=class_names,
     )
 
     # Resume from checkpoint if specified
@@ -178,6 +198,8 @@ def main():
         print(f"Best validation loss: {history['best_val_loss']:.4f}")
         print(f"Best validation accuracy: {history['best_val_acc']:.2f}%")
         print(f"Final checkpoint: {trainer.checkpoint_dir / 'best.pt'}")
+        print(f"Training curves:  {trainer.results_dir / 'training_curves.png'}")
+        print(f"Test metrics:     {trainer.results_dir / 'test_metrics.json'}")
         print(f"\nView training progress:")
         print(f"  tensorboard --logdir {trainer.log_dir.parent}")
         print("=" * 80)

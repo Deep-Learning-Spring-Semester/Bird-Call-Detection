@@ -97,6 +97,7 @@ def _scan_tensors(tensor_dir: Path, label_map: dict[str, int]) -> tuple[list[Pat
 
 def build_dataloaders(
     config: dict | None = None,
+    train_transform=None,
 ) -> tuple[DataLoader, DataLoader, DataLoader, dict[str, int], torch.Tensor]:
     """Build train/val/test DataLoaders with stratified splitting.
 
@@ -109,6 +110,8 @@ def build_dataloaders(
             - use_augmented (bool, default True) — add augmented data to train
             - use_weighted_sampler (bool, default True)
             - seed (int, default 42)
+        train_transform: Optional transform applied to training samples only
+            (e.g. SpecAugment). Val/test sets are never augmented.
 
     Returns:
         (train_loader, val_loader, test_loader, label_map, class_weights)
@@ -196,8 +199,8 @@ def build_dataloaders(
     log.info(f"Split sizes — train: {len(train_paths)}, val: {len(val_paths)}, test: {len(test_paths)}")
     log.info(f"Class counts (train): min={int(class_counts.min())}, max={int(class_counts.max())}")
 
-    # Create datasets
-    train_dataset = BirdCallDataset(train_paths, train_labels)
+    # Create datasets (transform applied to training only; val/test are never augmented)
+    train_dataset = BirdCallDataset(train_paths, train_labels, transform=train_transform)
     val_dataset = BirdCallDataset(val_paths, val_labels)
     test_dataset = BirdCallDataset(test_paths, test_labels)
 
